@@ -30,7 +30,18 @@ body {
 }
 
 /* ── LAYOUT ── */
-.wrapper { display:grid; grid-template-rows:80px 1fr 68px; height:1080px; width:1920px; }
+.wrapper { display:grid; grid-template-rows:80px 1fr 68px; height:1080px; width:1920px; transition:grid-template-rows 0.4s ease; }
+body.in-game .wrapper { grid-template-rows:50px 1fr 36px; }
+body.in-game header { padding:0 36px; }
+body.in-game .hdr-logo { width:32px; height:32px; }
+body.in-game .hdr-title { font-size:18px; }
+body.in-game .hdr-sub { display:none; }
+body.in-game .room-code { font-size:24px; letter-spacing:5px; }
+body.in-game .room-label { font-size:8px; margin-top:1px; }
+body.in-game .hdr-stat-val { font-size:20px; }
+body.in-game .hdr-stat-label { font-size:8px; margin-top:0; }
+body.in-game .hdr-sep { height:24px; }
+body.in-game .hdr-right { gap:18px; }
 
 /* ── HEADER ── */
 header {
@@ -728,6 +739,7 @@ function renderState() {
   document.getElementById('lobbyOverlay').style.display = isLobby ? 'flex' : 'none';
   const gt = document.getElementById('gameTable');
   gt.style.display = isLobby ? 'none' : 'flex';
+  document.body.classList.toggle('in-game', !isLobby);
 
   // Round badge
   const rb = document.getElementById('roundBadge');
